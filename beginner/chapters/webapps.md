@@ -83,8 +83,8 @@ Docker images are the basis of containers. In the previous example, you **pulled
 ```
 $ docker images
 REPOSITORY             TAG                 IMAGE ID            CREATED             SIZE
-seqvence/static-site   latest              92a386b6e686        2 hours ago        190.5 MB
-nginx                  latest              af4b3d7d5401        3 hours ago        190.5 MB
+seqvence/static-site   latest              92a386b6e686        2 hours ago         190.5 MB
+nginx                  latest              af4b3d7d5401        3 hours ago         190.5 MB
 python                 2.7                 1c32174fd534        14 hours ago        676.8 MB
 postgres               9.4                 88d845ac7a88        14 hours ago        263.6 MB
 containous/traefik     latest              27b4e0c6b2fd        4 days ago          20.75 MB
