@@ -1,4 +1,4 @@
-## 1.0 Running your first container
+
 Now that you have everything setup, it's time to get our hands dirty. In this section, you are going to run a [Alpine Linux](http://www.alpinelinux.org/) container (a lightweight linux distribution) on our system and get a taste of the `docker run` command.
 
 To get started, let's run the following in our terminal:
@@ -12,11 +12,11 @@ The `pull` command fetches the alpine **image** from the **Docker registry** and
 ```
 $ docker images
 REPOSITORY              TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-alpine                 latest              c51f86c28340        4 weeks ago         1.109 MB
+alpine                  latest              c51f86c28340        4 weeks ago         1.109 MB
 hello-world             latest              690ed74de00f        5 months ago        960 B
 ```
 
-### 1.1 Docker Run
+### 2.1 Docker Run
 Great! Let's now run a Docker **container** based on this image. To do that you are going to use the `docker run` command.
 
 ```
@@ -27,7 +27,6 @@ drwxr-xr-x    5 root     root           360 Mar 18 09:47 dev
 drwxr-xr-x   13 root     root          4096 Mar 18 09:47 etc
 drwxr-xr-x    2 root     root          4096 Mar  2 16:20 home
 drwxr-xr-x    5 root     root          4096 Mar  2 16:20 lib
-......
 ......
 ```
 What happened? Behind the scenes, a lot of stuff happened. When you call `run`, the Docker client finds the image (alpine in this case), creates the container and then runs a command in that container. When you run `docker run alpine`, you provided a command (`ls -l`), so Docker started the command specified and you saw the listing.
@@ -89,7 +88,9 @@ Running the `run` command with the `-it` flags attaches us to an interactive tty
 > **Danger Zone**: If you're feeling particularly adventurous you can try `rm -rf /bin` in the container. Make sure you run this command in the container and **not** in your laptop. Doing this will not make any other commands like `ls` and `grep` work. Once everything stops working, you can exit the container and then start it up again with the `docker run -it alpine sh` command. Since Docker creates a new container every time, everything should start working again.
 
 That concludes a whirlwind tour of the `docker run` command which would most likely be the command you'll use most often. It makes sense to spend some time getting comfortable with it. To find out more about `run`, use `docker run --help` to see a list of all flags it supports. As you proceed further, we'll see a few more variants of `docker run`.
-### 1.2 Terminology
+
+### 2.2 Terminology
+
 In the last section, you saw a lot of Docker-specific jargon which might be confusing to some. So before you go further, let's clarify some terminology that is used frequently in the Docker ecosystem.
 
 - *Images* - The Filesystem and configuration of our application which are used to create containers. To find out more about a Docker image, run `docker inspect alpine`. In the demo above, you used the `docker pull` command to download the **alpine** image. When you executed the command `docker run hello-world`, it also did a `docker pull` behind the scenes to download the **hello-world** image.
@@ -99,4 +100,5 @@ In the last section, you saw a lot of Docker-specific jargon which might be conf
 - *Docker Hub* - A [registry](https://hub.docker.com/explore/) of Docker images. You can think of the registry as a directory of all available Docker images. You'll be using this later in this tutorial.
 
 ## Next Steps
-For the next step in the tutorial, head over to [2.0 Webapps with Docker](./webapps.md)
+
+For the next step in the tutorial, head over to [3. Webapps with Docker](/workshop/3)

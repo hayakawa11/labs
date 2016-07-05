@@ -1,7 +1,8 @@
-## 2.0 Webapps with Docker
+
 Great! So you have now looked at `docker run`, played with a docker container and also got a hang of some terminology. Armed with all this knowledge, you are now ready to get to the real-stuff i.e. deploying web applications with Docker.
 
-### 2.1 Static Sites
+### 3.1 Static Sites
+
 _Code for this section is in this repo in the [static-site directory](https://github.com/docker/labs/tree/master/beginner/static-site)_
 Let's start by taking baby-steps. The first thing we're going to look at is how you can run a dead-simple static website. You're going to pull a docker image from the docker hub, run the container and see how easy it so to set up a webserver.
 
@@ -62,7 +63,7 @@ You can also run a second webserver at the same time, specifying a custom host p
 ```
 $ docker run --name static-site-2 -e AUTHOR="Your Name" -d -p 8888:80 seqvence/static-site
 ```
-<img src="../images/static.png" title="static">
+<img src="https://raw.githubusercontent.com/supinf/labs/master/beginner/images/static.png" title="static">
 
 I'm sure you agree that was super simple. To deploy this on a real server you would just need to install docker, and run the above docker command.
 
@@ -73,7 +74,7 @@ $ docker stop static-site static-site-2
 $ docker rm static-site static-site-2
 ```
 
-### 2.2 Docker Images
+### 3.2 Docker Images
 
 You've looked at images before but in this section we'll dive deeper into what docker images are and build our own image. And, we'll also use that image to run our application locally. Finally, you'll push some of your images to Docker Hub.
 
@@ -128,13 +129,14 @@ Then there are two more types of images that can be both base and child images, 
 
 - **User images** are images created and shared by users like you. They build on base images and add additional functionality. Typically these are formatted as `user/image-name`. The `user` value in the image name is your Docker Hub user or organization name.
 
-### 2.3 Our First Image
+### 3.3 Our First Image
+
 _The code for this section is in this repository in the [flask-app](https://github.com/docker/labs/tree/master/beginner/flask-app) directory_
 
 Now that you have a better understanding of images, it's time to create our own. Our goal in this section will be to create an image that sandboxes a small [Flask](http://flask.pocoo.org) application.
 For the purposes of this workshop, we'll created a fun little Python Flask app that displays a random cat `.gif` every time it is loaded - because you know, who doesn't like cats?
 
-### 2.4 Dockerfile
+### 3.4 Dockerfile
 
 A [Dockerfile](https://docs.docker.com/engine/reference/builder/) is a text-file that contains a list of commands that the Docker daemon calls while creating an image. It is simple way to automate the image creation process. The best part is that the [commands](https://docs.docker.com/engine/reference/builder/) you write in a Dockerfile are *almost* identical to their equivalent Linux commands. This means you don't really have to learn new syntax to create your own Dockerfiles.
 
@@ -368,7 +370,7 @@ $ docker run -p 8888:5000 --name myfirstapp YOUR_USERNAME/myfirstapp
 
 Head over to `http://<DOCKER_HOST-IP-ADDRESS>:8888` and your app should be live. You may need to open up another terminal and determine the container ip address using `docker-machine ip default`.
 
-<img src="../images/catgif.png" title="static">
+<img src="https://raw.githubusercontent.com/supinf/labs/master/beginner/images/catgif.png" title="static">
 
 Hit the Refresh button in the web browser to see a few more cat images.
 
@@ -380,5 +382,7 @@ Open another terminal window and execute the following commands:
 $ docker stop myfirstapp
 $ docker rm myfirstapp
 ```
+
 ## Next Steps
-For the next step in the tutorial head over to [3.0 Run a multi-container app with Docker Compose](./votingapp.md)
+
+For the next step in the tutorial head over to [4. Run a multi-container app with Docker Compose](/workshop/4)

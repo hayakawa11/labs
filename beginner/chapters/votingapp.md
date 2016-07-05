@@ -1,4 +1,4 @@
-## 3.0 Run a multi-container app with Docker Compose
+
 This portion of the tutorial will guide you through the creation and customization of a voting app. It's important that you follow the steps in order, and make sure to customize the portions that are customizable.
 
 **Important.**
@@ -13,7 +13,8 @@ And follow the login directions. Now you can push images to Docker Hub.
 > Note: If you encounter an error response from daemon while attempting to login, you may need to restart your machine by running `docker-machine restart <YOUR_DOCKER_MACHINE_NAME>`.
 
 
-### 3.1 Get the voting-app
+### 4.1 Get the voting-app
+
 You now know how to build your own Docker image, so let's take it to the next level and glue things together. For this app you have to run multiple containers and Docker Compose is the best way to do that.
 
 Start by quickly reading the documentation available [here](https://docs.docker.com/compose/overview/).
@@ -24,9 +25,9 @@ Clone the voting-app repository already available at [Github Repo](https://githu
 git clone https://github.com/docker/example-voting-app.git
 ```
 
-### 3.2 Customize the app
+### 4.2 Customize the app
 
-#### 3.2.1 Modify app.py
+#### 4.2.1 Modify app.py
 
 In the folder ```example-voting-app/voting-app``` you need to edit the app.py and change the two options for the programming languages you chose.
 
@@ -43,7 +44,9 @@ substituting two options of your choice. For instance:
 option_a = os.getenv('OPTION_A', "Cats")
 option_b = os.getenv('OPTION_B', "Dogs")
 ```
-#### 3.2.2 Running your app
+
+#### 4.2.2 Running your app
+
 Now, run your application. To do that, we'll use [Docker Compose](https://docs.docker.com/compose). Docker Compose is a tool for defining and running multi-container Docker applications. With Compose, you define a `.yml` file that describes all the containers and volumes that you want, and the networks between them. In the example-voting-app directory, you'll see a `docker-compose.yml file`:
 
 ```yml
@@ -126,7 +129,7 @@ $ docker-machine ip default
 
 It'll return an IP address. If you only have one Docker Machine running, most likely, that's 192.168.99.100. We'll call that `<YOUR_IP_ADDRESS>`. Navigate to `http://<YOUR_IP_ADDRESS>:5000` in your browser, and you'll see the voting app, something like this:
 
-<img src="../images/vote.png" title="vote">
+<img src="https://raw.githubusercontent.com/supinf/labs/master/beginner/images/vote.png" title="vote">
 
 Click on one to vote. You can check the results at `http://<YOUR_IP_ADDRESS:5001>`.
 
@@ -136,7 +139,7 @@ Click on one to vote. You can check the results at `http://<YOUR_IP_ADDRESS:5001
 $ ssh -L 5000:localhost:5000 <ssh-user>@<CLOUD_INSTANCE_IP_ADDRESS>
 ```
 
-#### 3.2.3 Build and tag images
+#### 4.2.3 Build and tag images
 
 You are all set now. Navigate to each of the directories where you have a Dockerfile to build and tag your images that you want to submit.
 
@@ -150,7 +153,7 @@ $ docker build --no-cache -t <YOUR_DOCKER_ID>/votingapp_result-app .
 $ docker build --no-cache -t <YOUR_DOCKER_ID>/votingapp_worker .
 ```
 
-#### 3.2.4 Push images to Docker Hub
+#### 4.2.4 Push images to Docker Hub
 
 Push the images to Docker hub. Remember, you must have run `docker login` before you can push.
 
@@ -170,5 +173,6 @@ $ docker pull <YOUR_DOCKER_ID>/votingapp_result-app
 $ docker pull <YOUR_DOCKER_ID>/votingapp_worker
 ```
 
-### 3.3 Next steps
+### Next steps
+
 Now that you've built some images and pushed them to hub, and learned about Docker Compose, you can explore more of Docker by checking out [the documentation](https://docs.docker.com). And if you need any help, check out the [Docker Forums](forums.docker.com) or [StackOverflow](https://stackoverflow.com/tags/docker/).
