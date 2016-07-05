@@ -1,14 +1,16 @@
 
-Now that you have everything setup, it's time to get our hands dirty. In this section, you are going to run a <a href="http://www.alpinelinux.org/" target="_blank">Alpine Linux</a> container (a lightweight linux distribution) on our system and get a taste of the `docker run` command.
+セットアップできたら、早速踏み込んで使ってみましょう。この節では <a href="http://www.alpinelinux.org/" target="_blank">Alpine Linux</a>（軽量 Linux ディストリビューション）コンテナを走らせ、`docker run` コマンドの味見をしてみます。
 
-To get started, let's run the following in our terminal:
+ではまず、ターミナルで次のコマンドを実行しましょう。
+
 ```
 $ docker pull alpine
 ```
 
-> Note: Depending on how you've installed docker on your system, you might see a `permission denied` error after running the above command. If you're on a Mac, [verify your installation](https://docs.docker.com/mac/step_one/). If you're on Linux, you may need to prefix your `docker` commands with `sudo`. Alternatively you can [create a docker group](https://docs.docker.com/engine/installation/linux/ubuntulinux/#/create-a-docker-group) to get rid of this issue.
+> 補足: Docker をどのようにインストールしたかによりますが、もしかすると `permission denied` と表示されたかもしれません。Linux であれば `docker` コマンドの前に `sudo` をつける必要があるかもしれません。もしくは <a href="http://docs.docker.jp/engine/installation/ubuntulinux.html#docker" target="_blank">docker グループの作成</a> によって問題を解決することができます。
 
-The `pull` command fetches the alpine **image** from the **Docker registry** and saves it in our system. You can use the `docker images` command to see a list of all images on your system.
+`pull` コマンドは **Docker レジストリ** から alpine **イメージ** をダウンロードし、そのデータをあなたの端末に保存します。`docker images` コマンドを使えば、保存されたイメージの一覧を確認することができます。
+
 ```
 $ docker images
 REPOSITORY              TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
@@ -17,7 +19,8 @@ hello-world             latest              690ed74de00f        5 months ago    
 ```
 
 ### 2.1 Docker Run
-Great! Let's now run a Docker **container** based on this image. To do that you are going to use the `docker run` command.
+
+では続けて、このイメージを使って Docker **コンテナ** を起動してみましょう。`docker run` コマンドを使います。
 
 ```
 $ docker run alpine ls -l
@@ -29,33 +32,36 @@ drwxr-xr-x    2 root     root          4096 Mar  2 16:20 home
 drwxr-xr-x    5 root     root          4096 Mar  2 16:20 lib
 ......
 ```
-What happened? Behind the scenes, a lot of stuff happened. When you call `run`, the Docker client finds the image (alpine in this case), creates the container and then runs a command in that container. When you run `docker run alpine`, you provided a command (`ls -l`), so Docker started the command specified and you saw the listing.
 
-Let's try something more exciting.
+何が起きたのでしょうか？このコマンドの裏では、とてもたくさんのことが起こっています。`run` を実行すると Docker クライアントはイメージを探し（このケースでは alpine）、コンテナを作成し、そのコンテナの *中で* 指定したコマンド（ls -l）を実行します。結果として、コンテナ内部のディレクトリが一覧表示されています。
+
+もっと楽しいことをやってみましょう。
 
 ```
 $ docker run alpine echo "hello from alpine"
 hello from alpine
 ```
-OK, that's some actual output. In this case, the Docker client dutifully ran the `echo` command in our alpine container and then exited it. If you've noticed, all of that happened pretty quickly. Imagine booting up a virtual machine, running a command and then killing it. Now you know why they say containers are fast!
 
-Try another command.
+何か表示されました！このケースでは Docker クライアントは alpine コンテナ内部で忠実に `echo` を実行した後、そこから exit したようです。お気づきのように、すべてがとても高速です。仮想マシンを起動し、コマンドを実行し、それを終了することを想像してみてください。誰もがコンテナは速い！という意味をお分かりいただけたと思います。
+
+もうひとつ別のコマンドを試しましょう。
+
 ```
 $ docker run alpine uptime
 00:16:48 up  1:48,  0 users,  load average: 0.00, 0.01, 0.04
 ```
 
-Try another command.
+いいですね。ではもうひとつ。
+
 ```
 $ docker run alpine /bin/sh
 ```
 
-Wait, nothing happened! Is that a bug? Well, no. These interactive shells will exit after running any scripted commands, unless they are run in an interactive terminal - so for this example to not exit, you need to `docker run -it alpine /bin/sh`.
+おっと、何も起きない！バグでしょうか・・？いえ、違います。この手の対話型シェルは、対話のできる *ターミナル内で実行しない限り* 、記述されたコマンドを実行するとすぐに exit してしまうのです。そこで改めて、exit しないよう `-it` オプションをつけて `docker run -it alpine /bin/sh` を実行します。
 
-You are now inside the container shell and you can try out a few commands like `ls -l`, `uptime` and others. Exit out of the container by giving the `exit` command.
+これでコンテナ内部のシェルと対話できる状態になりました。`ls -l` や `uptime` などいくつかコマンドを試してみましょう。`exit` でコンテナから抜けることができます。
 
-
-Ok, now it's time to see the `docker ps` command. The `docker ps` command shows you all containers that are currently running.
+では次に、`docker ps` コマンドをみてみましょう。`docker ps` コマンドは現在起動しているコンテナの一覧を返してくれます。
 
 ```
 $ docker ps
@@ -99,6 +105,6 @@ In the last section, you saw a lot of Docker-specific jargon which might be conf
 - *Docker client* - The command line tool that allows the user to interact with the Docker daemon.
 - *Docker Hub* - A [registry](https://hub.docker.com/explore/) of Docker images. You can think of the registry as a directory of all available Docker images. You'll be using this later in this tutorial.
 
-## Next Steps
+## 次のステップ
 
-For the next step in the tutorial, head over to [3. Webapps with Docker](/workshop/3)
+次のチュートリアル [3. Docker を使った Web アプリケーション](/workshop/3) に進みましょう。
