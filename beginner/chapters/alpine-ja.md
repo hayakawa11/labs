@@ -7,7 +7,7 @@
 $ docker pull alpine
 ```
 
-> 補足: Docker をどのようにインストールしたかによりますが、もしかすると `permission denied` と表示されたかもしれません。Linux であれば `docker` コマンドの前に `sudo` をつける必要があるかもしれません。もしくは <a href="http://docs.docker.jp/engine/installation/ubuntulinux.html#docker" target="_blank">docker グループの作成</a> によって問題を解決することができます。
+> 補足: Docker をどのようにインストールしたかによりますが、もしかすると `permission denied` と表示されるかもしれません。その場合、Linux であれば `docker` コマンドの前に `sudo` をつけるか、<a href="http://docs.docker.jp/engine/installation/ubuntulinux.html#docker" target="_blank">docker グループの作成</a> によって問題を解決することができます。
 
 `pull` コマンドは **Docker レジストリ** から alpine **イメージ** をダウンロードし、そのデータをあなたの端末に保存します。`docker images` コマンドを使えば、保存されたイメージの一覧を確認することができます。
 
@@ -61,14 +61,14 @@ $ docker run alpine /bin/sh
 
 これでコンテナ内部のシェルと対話できる状態になりました。`ls -l` や `uptime` などいくつかコマンドを試してみましょう。`exit` でコンテナから抜けることができます。
 
-では次に、`docker ps` コマンドをみてみましょう。`docker ps` コマンドは現在起動しているコンテナの一覧を返してくれます。
+次に、`docker ps` コマンドをみてみましょう。`docker ps` コマンドは現在起動しているコンテナの一覧を返してくれます。
 
 ```
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 ```
 
-Since no containers are running, you see a blank line. Let's try a more useful variant: `docker ps -a`
+実行中のコンテナがないので 1 行も表示されません。ではここで、便利なオプションを指定してみましょう: `docker ps -a`
 
 ```
 $ docker ps -a
@@ -80,7 +80,7 @@ ff0a5c3750b9        alpine             "ls -l"                   8 minutes ago  
 c317d0a9e3d2        hello-world         "/hello"                 34 seconds ago      Exited (0) 12 minutes ago                       stupefied_mcclintock
 ```
 
-What you see above is a list of all containers that you ran. Notice that the `STATUS` column shows that these containers exited a few minutes ago. You're probably wondering if there is a way to run more than just one command in a container. Let's try that now:
+表示されたのはこれまで実行したすべてのコンテナです。`STATUS` 列を見ると、コンテナたちが数分前に exit したことがわかります。ところで、コンテナの中で複数のコマンドを実行する方法があるのか気になった方のために、次はそれを試してみましょう。
 
 ```
 $ docker run -it alpine /bin/sh
@@ -89,13 +89,14 @@ bin      dev      etc      home     lib      linuxrc  media    mnt      proc    
 / # uptime
  05:45:21 up  5:58,  0 users,  load average: 0.00, 0.01, 0.04
 ```
-Running the `run` command with the `-it` flags attaches us to an interactive tty in the container. Now you can run as many commands in the container as you want. Take some time to run your favorite commands.
+
+`-it` オプションをつけて `run` すると、対話モードでコンテナ内の tty に接続できます。こうなれば、あとは好きなだけコンテナ内でコマンドを実行できます。いくつか好きなコマンドを実行してみてください。
 
 > **Danger Zone**: If you're feeling particularly adventurous you can try `rm -rf /bin` in the container. Make sure you run this command in the container and **not** in your laptop. Doing this will not make any other commands like `ls` and `grep` work. Once everything stops working, you can exit the container and then start it up again with the `docker run -it alpine sh` command. Since Docker creates a new container every time, everything should start working again.
 
 That concludes a whirlwind tour of the `docker run` command which would most likely be the command you'll use most often. It makes sense to spend some time getting comfortable with it. To find out more about `run`, use `docker run --help` to see a list of all flags it supports. As you proceed further, we'll see a few more variants of `docker run`.
 
-### 2.2 Terminology
+### 2.2 用語集
 
 In the last section, you saw a lot of Docker-specific jargon which might be confusing to some. So before you go further, let's clarify some terminology that is used frequently in the Docker ecosystem.
 

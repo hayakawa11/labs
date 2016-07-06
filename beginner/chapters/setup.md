@@ -12,12 +12,12 @@ The *getting started* guide on Docker has detailed instructions for setting up D
 Once you are done installing Docker, test your Docker installation by running the following:
 ```
 $ docker run hello-world
-
+　
 ...
-
+　
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
-
+　
 ...
 ```
 
